@@ -1,0 +1,8 @@
+#Ignore the sample mp3 file
+music.mp3
+
+#Ignore the executable
+fmp3
+
+#Ignore VSCode configuration files
+.vscode
