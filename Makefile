@@ -23,4 +23,4 @@ System.o: System.cpp
 	$(CC) $(CFLAGS) -c System.cpp
 
 clean:
-	rm -rf *.o 
+	rm -rf *.o test
