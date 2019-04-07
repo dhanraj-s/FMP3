@@ -1,19 +1,26 @@
-all: test
+CC = g++
+CFLAGS = -Wall
+OBJS = musicSystem.o Channel.o Sound.o System.o
+PROG = test
+LOCALLIBDIR = /usr/local/lib
+LDLIBS = -lfmod
 
-test: musicSystem.o Channel.o Sound.o System.o
-	g++ musicSystem.o Channel.o Sound.o System.o -Wl,-rpath=/usr/local/lib -lfmod -o test
+all: $(PROG)
+
+test: $(OBJS)
+	$(CC) $(OBJS) -Wl,-rpath=$(LOCALLIBDIR) $(LDLIBS) -o $(PROG)
 
 musicSystem.o: musicSystem.cpp
-	g++ -c musicSystem.cpp
+	$(CC) $(CFLAGS) -c musicSystem.cpp
 
 Channel.o: Channel.cpp
-	g++ -c Channel.cpp
+	$(CC) $(CFLAGS) -c Channel.cpp
 
 Sound.o: Sound.cpp
-	g++ -c Sound.cpp
+	$(CC) $(CFLAGS) -c Sound.cpp
 
 System.o: System.cpp
-	g++ -c System.cpp
+	$(CC) $(CFLAGS) -c System.cpp
 
 clean:
 	rm -rf *.o 
