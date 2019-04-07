@@ -6,3 +6,6 @@ fmp3
 
 #Ignore VSCode configuration files
 .vscode
+
+#Ignore test executable
+test
