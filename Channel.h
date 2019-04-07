@@ -4,6 +4,8 @@
 #include <FMOD/fmod.hpp>
 #include <FMOD/fmod_errors.h>
 
+constexpr float INVALID_VOLUME = -1;
+
 struct Channel
 {
 private:
