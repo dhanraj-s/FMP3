@@ -5,13 +5,12 @@
 
 float Channel::getVolume()
 {
-    float volume = -1;
+    float volume {INVALID_VOLUME};
     result = m_channel -> getVolume(&volume);
     if(result != FMOD_OK && result != FMOD_ERR_INVALID_HANDLE)
         throw fmodException("ChannelControl::getVolume(): ", result);
 
     return volume;
-
 }
 
 void Channel::setVolume(float vol)
@@ -45,7 +44,6 @@ void Channel::stopChannel()
         std::cerr << "Channel already stopped!\n";
         return;
     }
-
 }
 
 bool Channel::isPaused()

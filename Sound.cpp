@@ -9,11 +9,11 @@ Sound::~Sound()
         if(m_sound != nullptr){
             result = m_sound -> release();
             if(result != FMOD_OK)
-              	throw fmodException("Sound::release(): ", result);
+              	throw fmodExceptionCritical("Sound::release(): ", result);
             m_sound = nullptr;
         }
     }
-    catch(const fmodException& e){
-        std::cerr << e.what() << "\n";
+    catch(const fmodExceptionCritical& e){
+        std::cerr << "CRITICAL FAILURE: " << e.what() << "\n";
     }
 }

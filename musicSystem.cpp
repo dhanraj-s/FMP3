@@ -21,7 +21,7 @@ int main()
         bool playing {false};
         while(choice != 6){
             float volume = ch.getVolume();
-            if(volume == -1)
+            if(volume == INVALID_VOLUME)
                 std::cout << "VOL : Channel not playing\n";
             else
                 std::cout << "VOL : " << volume * 100 << "\n";
@@ -65,8 +65,12 @@ int main()
             }
         }
     }
+    catch(const fmodExceptionCritical& e){
+        std::cerr << "CRITICAL FAILURE: " << e.what() << "\n";
+        return EXIT_FAILURE;
+    }
     catch(const fmodException& e){
-        std::cerr << "EXCEPTION CAUGHT: " << e.what() << "\n";
+        std::cerr << e.what() << "\n";
         return EXIT_FAILURE;
     }
 }

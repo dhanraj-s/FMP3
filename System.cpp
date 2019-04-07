@@ -21,8 +21,7 @@ void System::loadMusic(const std::string& songName, Sound& sound)
 
 void System::playMusic(const Sound& sound, Channel& channel)
 {
-    bool paused {false};
-    result = m_system -> playSound(sound.m_sound, nullptr, paused, &channel.m_channel);
+    result = m_system -> playSound(sound.m_sound, nullptr, false, &channel.m_channel);
     if(result != FMOD_OK)
         throw fmodException("System::playSound(): ", result);
 }
@@ -43,7 +42,7 @@ void System::cleanUpSystem()
 {
     result = m_system -> release();
     if(result != FMOD_OK){
-        throw fmodException("System::release():  ", result);
+        throw fmodExceptionCritical("System::release():  ", result);
     }
 }
 
@@ -52,11 +51,11 @@ System::~System()
     try {
         result = m_system -> release();
         if(result != FMOD_OK){
-            throw fmodException("System::release(): ", result);
+            throw fmodExceptionCritical("System::release(): ", result);
         }
         m_system = nullptr;
     }
-    catch(const fmodException& e){
-        std::cerr << e.what() << "\n";
+    catch(const fmodExceptionCritical& e){
+        std::cerr << "CRITICAL FAILURE: " << e.what() << "\n";
     }
 }

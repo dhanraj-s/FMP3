@@ -5,6 +5,7 @@
 #include <FMOD/fmod_errors.h>
 
 struct Sound
+//Instantiate only after System object is created.
 {
 private:
     FMOD_RESULT result;
