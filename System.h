@@ -14,6 +14,7 @@ class System
     void cleanUpSystem();
 
     FMOD_RESULT result;
+    static constexpr int NUM_CHANNELS = 32;
 public:
     System(const System&) = delete;
     System(System&&) = delete;

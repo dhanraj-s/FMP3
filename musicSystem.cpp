@@ -21,7 +21,7 @@ int main()
         bool playing {false};
         while(choice != 6){
             float volume = ch.getVolume();
-            if(volume == INVALID_VOLUME)
+            if(volume == Channel::INVALID_VOLUME)
                 std::cout << "VOL : Channel not playing\n";
             else
                 std::cout << "VOL : " << volume * 100 << "\n";

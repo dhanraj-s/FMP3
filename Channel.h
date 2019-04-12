@@ -4,8 +4,6 @@
 #include <FMOD/fmod.hpp>
 #include <FMOD/fmod_errors.h>
 
-constexpr float INVALID_VOLUME = -1;
-
 struct Channel
 {
 private:
@@ -13,6 +11,8 @@ private:
 public:
     FMOD::Channel *m_channel {nullptr};
 
+    static constexpr float INVALID_VOLUME = -1;
+    
     bool isPlaying();
     void stopChannel();
     bool isPaused();
