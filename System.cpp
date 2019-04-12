@@ -2,6 +2,7 @@
 #include <FMOD/fmod_errors.h>
 #include <string>
 #include <iostream>
+#include <cstdlib>
 
 #include "System.h"
 #include "fmodException.h"
@@ -31,11 +32,17 @@ void System::playMusic(const Sound& sound, Channel& channel)
     if((result = FMOD::System_Create(&m_system)) != FMOD_OK)
         throw fmodException("FMOD::System_Create(): ", result);
 
-    if((result = m_system -> init(32, FMOD_INIT_NORMAL, nullptr)) != FMOD_OK){
-        cleanUpSystem();
-        throw fmodException("System::init(): ", result);
+    if((result = m_system -> init(NUM_CHANNELS, FMOD_INIT_NORMAL, nullptr)) != FMOD_OK){
+        try {
+            throw fmodException("System::init(): ", result);
+        }
+        catch(const fmodException& e) {
+            std::cerr << e.what() << "\n";
+            cleanUpSystem();
+            exit(EXIT_FAILURE);
+        }
     }
-
+    
 }
 
 void System::cleanUpSystem()
@@ -49,10 +56,7 @@ void System::cleanUpSystem()
 System::~System()
 {
     try {
-        result = m_system -> release();
-        if(result != FMOD_OK){
-            throw fmodExceptionCritical("System::release(): ", result);
-        }
+        cleanUpSystem();
         m_system = nullptr;
     }
     catch(const fmodExceptionCritical& e){
