@@ -3,6 +3,10 @@
 #include "Channel.h"
 #include "fmodException.h"
 
+/* NOTE: Channel functions return FMOD_ERR_INVALID_HANDLE if audio is not playing. Checking for
+this error code checks whether audio is playing or not. Please refer to the FMOD Core API docs 
+for more information. */
+
 float Channel::getVolume()
 {
     float volume {INVALID_VOLUME};
