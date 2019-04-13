@@ -8,6 +8,8 @@
 #include "Sound.h"
 #include "Channel.h"
 
+/* This is only to test everything out */
+
 int main()
 {
     try{
