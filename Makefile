@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -Wall
-OBJS = musicSystem.o Channel.o Sound.o System.o
+OBJS = main.o Channel.o Sound.o System.o musicPlayer.o
 PROG = test
 LOCALLIBDIR = /usr/local/lib
 LDLIBS = -lfmod
@@ -10,8 +10,8 @@ all: $(PROG)
 test: $(OBJS)
 	$(CC) $(OBJS) -Wl,-rpath=$(LOCALLIBDIR) $(LDLIBS) -o $(PROG)
 
-musicSystem.o: musicSystem.cpp
-	$(CC) $(CFLAGS) -c musicSystem.cpp
+main.o: main.cpp
+	$(CC) $(CFLAGS) -c main.cpp
 
 Channel.o: Channel.cpp
 	$(CC) $(CFLAGS) -c Channel.cpp
@@ -21,6 +21,9 @@ Sound.o: Sound.cpp
 
 System.o: System.cpp
 	$(CC) $(CFLAGS) -c System.cpp
+
+musicPlayer.o: musicPlayer.cpp
+	$(CC) $(CFLAGS) -c musicPlayer.cpp
 
 clean:
 	rm -rf *.o test
