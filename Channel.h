@@ -8,14 +8,14 @@ struct Channel
 {
 private:
     FMOD_RESULT result;
+    bool isPlaying();
+    bool isPaused();
 public:
     FMOD::Channel *m_channel {nullptr};
 
     static constexpr float INVALID_VOLUME = -1;
     
-    bool isPlaying();
     void stopChannel();
-    bool isPaused();
     void switchPause();
     float getVolume();
     void setVolume(float vol);
