@@ -29,3 +29,12 @@ void musicPlayer::resume()
         paused = false;
     }
 }
+
+void musicPlayer::setVolume(float v)
+{
+    if(v < 0 || v > 100) {
+        std::cerr << "Invalid volume. Enter a value between 0 and 100 (inclusive)\n";
+        return;
+    }
+    m_ch.setVolume(v / 100);
+}
