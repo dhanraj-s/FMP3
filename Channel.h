@@ -19,6 +19,11 @@ public:
     void switchPause();
     float getVolume() const;
     void setVolume(float vol);
+
+    Channel(const Channel&) = delete;
+    Channel(Channel&&) = delete;
+    Channel& operator = (const Channel&) = delete;
+    Channel& operator = (Channel&&) = delete;
 };
 
 #endif //CHANNEL
