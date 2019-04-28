@@ -2,49 +2,34 @@
 #include <FMOD/fmod_errors.h>
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 #include "fmodException.h"
 #include "musicPlayer.h"
+#include "mainHelpers.h"
 
-/* This is only to test everything out */
-
-int main()
+constexpr auto menu
 {
+    "1.Play\n2.Stop\n3.Pause\n4.Resume\n5.Change Volume\n6.Quit\n"
+    "Enter your choice: "
+};
+
+int main(int argc, char *argv[])
+{
+    if(argc != 2) {
+        std::cerr << "Usage: ./fmp3 <filename>\n";
+        return EXIT_FAILURE;
+    }
+    const std::string fileName {argv[1]};
     try{
-        musicPlayer p("music.mp3");
+        musicPlayer p {fileName};
         int choice {0};
+        
         while(choice != 6) {
-            float volume = p.getVolume();
-            if(volume == musicPlayer::INVALID_VOLUME)
-                std::cout << "VOL : Channel not playing\n";
-            else
-                std::cout << "VOL : " << volume << "\n";
-
-            std::cout << "1.Play\n2.Stop\n3.Pause\n4.Resume\n5.Change Volume\n6.Quit\n";
-            std::cout << "Enter your choice: ";
-            std::cin >> choice;
-
-            switch(choice) {
-                case 1:
-                    p.play();
-                    break;
-                case 2:
-                    p.stop();
-                    break;
-                case 3:
-                    p.pause();
-                    break;
-                case 4:
-                    p.resume();
-                    break;
-                case 5:
-                {
-                    float v{0};
-                    std::cout << "Enter volume: ";
-                    std::cin >> v;
-                    p.setVolume(v);
-                }
-            }
+            reportVolume(p);
+            std::cout << menu;
+            takeInput(choice);
+            handleInput(p, choice);
         }
     }
     catch(const fmodExceptionCritical& e){
