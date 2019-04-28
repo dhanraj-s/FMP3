@@ -28,8 +28,8 @@ public:
     void resume();
 
     //Volume is on a scale of 1 to 100
-    float getVolume() {return 100 * m_ch.getVolume();}
-    void setVolume(float v) {m_ch.setVolume(v / 100);}
+    float getVolume() const {return 100 * m_ch.getVolume();}
+    void setVolume(float v);
 
     musicPlayer(const musicPlayer&) = delete;
     musicPlayer(musicPlayer&&) = delete;
