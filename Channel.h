@@ -7,7 +7,7 @@
 struct Channel
 {
 private:
-    FMOD_RESULT result;
+    mutable FMOD_RESULT result;
     bool isPlaying();
     bool isPaused();
 public:
@@ -17,7 +17,7 @@ public:
     
     void stopChannel();
     void switchPause();
-    float getVolume();
+    float getVolume() const;
     void setVolume(float vol);
 };
 
