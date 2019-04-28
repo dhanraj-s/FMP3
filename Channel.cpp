@@ -7,7 +7,7 @@
 this error code checks whether audio is playing or not. Please refer to the FMOD Core API docs 
 for more information. */
 
-float Channel::getVolume()
+float Channel::getVolume() const
 {
     float volume {INVALID_VOLUME};
     result = m_channel -> getVolume(&volume);
